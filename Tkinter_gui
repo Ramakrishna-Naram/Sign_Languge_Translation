@@ -1,0 +1,91 @@
+import webbrowser
+from tkinter import *
+from tkinter import ttk
+import numpy as np
+import os
+from PIL import ImageTk, Image
+new_window = Tk()
+new_window.geometry("900x700")
+new_window.title("ABOUT US PAGE")
+
+
+def home_page():
+    new_window.destroy()
+    exec(open("tk4.py").read(), globals())
+def add_sign_page():
+    new_window.destroy()
+    exec(open("tk5.py").read(), globals())
+
+def about_page():
+    new_window.destroy()
+    exec(open("tk3.py").read(), globals())
+
+
+def del_pages():
+    for frame in main_frame.winfo_children():
+        frame.destroy()
+
+def hide_indi():
+    home_ind.config(bg="#c3c3c3")
+    menu_ind.config(bg="#c3c3c3")
+    about_ind.config(bg="#c3c3c3")
+def indi(lb,page):
+    hide_indi()
+    lb.config(bg='#158aff')
+    del_pages()
+    page()
+options_frame= Frame(new_window,highlightbackground="grey",highlightthickness=7,bg="black")
+
+home_btn = Button(options_frame,text='LANG_CONVERTER', font=("bold",15),fg="white",bd=0,bg="black",command=lambda: indi(home_ind, home_page))
+home_btn.place(x=10,y=50)
+home_ind = Label(options_frame,text='',bg="black")
+home_ind.place(x=3,y=50,width=5,height=40)
+
+menu_btn = Button(options_frame,text='ADD_SIGN', font=("bold",15),fg="white",bd=0,bg="black",command=lambda: indi(menu_ind, add_sign_page))
+menu_btn.place(x=10,y=100)
+menu_ind = Label(options_frame,text='',bg="black")
+menu_ind.place(x=3,y=100,width=5,height=40)
+
+about_btn = Button(options_frame,text='HOME', font=("bold",15),fg="white",bd=0,bg="black",command=lambda: indi(about_ind,about_page))
+about_btn.place(x=10,y=150)
+about_ind = Label(options_frame,text='',bg="black")
+about_ind.place(x=3,y=150,width=5,height=40)
+
+options_frame.pack(side=LEFT)
+options_frame.pack_propagate(False)
+options_frame.configure(width=250,height=1000)
+main_frame = Frame(new_window, highlightbackground="black", highlightthickness=10,bg='#555555')
+main_frame.pack(side=LEFT)
+main_frame.pack_propagate(False)
+main_frame.configure(height=1000, width=1500)
+
+# Open and resize the background image
+bg = Image.open('C:/Users/RK/Desktop/major_project/Rk/bg5.jpg')
+bg = bg.resize((main_frame.winfo_screenwidth(), main_frame.winfo_screenheight()))
+
+# Create a label with the background image as the background
+#baground = Label(main_frame)
+#baground.image = ImageTk.PhotoImage(bg)
+#baground.configure(image=baground.image)
+#baground.pack(fill=BOTH, expand=YES)
+male_img = PhotoImage(file="C:/Users/RK/Desktop/major_project/Rk/male.png")
+female_img = PhotoImage(file="C:/Users/Rk/Desktop/major_project/Rk/female2.png")
+card1 = Frame(main_frame,highlightbackground="black",highlightthickness=2,width=400,height=500,bg="orange")
+card1.place(x=100,y=150)
+card2 = Frame(main_frame,highlightbackground="black",highlightthickness=2,width=400,height=500,bg="orange")
+card2.place(x=450,y=150)
+card3 = Frame(main_frame,highlightbackground="black",highlightthickness=2,width=400,height=500,bg="orange")
+card3.place(x=800,y=150)
+Label(card1,image=male_img).pack()
+Label(card2,image=male_img).pack()
+Label(card3,image=male_img).pack()
+# Add some text labels and an image label to the background label
+
+logo_photo = ImageTk.PhotoImage(logo)
+Label(options_frame, image=logo_photo,width=250,height=290,bg='black').place(y=450)
+
+# Configure the grid layout of the frame
+main_frame.columnconfigure(0, weight=1)
+main_frame.rowconfigure(0, weight=1)
+
+new_window.mainloop()
